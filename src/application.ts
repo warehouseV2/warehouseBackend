@@ -1,14 +1,15 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {ApplicationConfig, BindingKey} from '@loopback/core';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
 } from '@loopback/rest-explorer';
-import {RepositoryMixin} from '@loopback/repository';
+import {RepositoryMixin, juggler} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import {dbConfig} from './datasources';
 
 export {ApplicationConfig};
 
@@ -17,6 +18,10 @@ export class WarehouseBackendApplication extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+
+    const dataSource = new juggler.DataSource(dbConfig);
+
+    this.dataSource(dataSource);
 
     // Set up the custom sequence
     this.sequence(MySequence);
