@@ -54,8 +54,8 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
+# # dotenv environment variables file
+# .env
 
 # Transpiled JavaScript files from Typescript
 /dist
@@ -67,3 +67,5 @@ typings/
 \#*#
 
 .node_modules
+
+package-lock.json
